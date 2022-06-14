@@ -191,7 +191,7 @@ int main(){
 					
 			}			
 				
-		}		
+		}
 		
 		for(i=0;i<num_linhas;i++){
 			for(j=0;j<num_colunas;j++){
@@ -207,10 +207,10 @@ int main(){
 		printf("\n");
 	}
 	
-//for(i=0;i<num_linhas;i++){
-//	free(espaco_amostral[i]);
-//}
-//free(espaco_amostral);
+	for(i=0;i<num_linhas;i++){
+		free(espaco_amostral[i]);
+	}
+	free(espaco_amostral);
 
 return 0;
 }
