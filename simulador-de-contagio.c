@@ -21,7 +21,7 @@ int main(){
 	
 	srand (time(NULL));
 	
-//	COLETA DOS DADOS DE INICIALIZAÇÃO DA SIMULAÇÃO:
+//	COLETA DOS DADOS PARA INICIALIZAÇÃO DA SIMULAÇÃO:
 
 	printf("\n");
 	printf("---------- COLETA DAS INFORMACOES SOBRE O ESPACO AMOSTRAL: ----------\n\n");
@@ -56,10 +56,13 @@ int main(){
 	espaco_vazio = taxa_isolamento;
 	espaco_cheio = (num_linhas*num_colunas)-taxa_isolamento;
 	
+//	DADOS DE MAPEAMENTO DE PESSOAS INFECTADAS:
+
 	int vet_linha[espaco_cheio];
 	int vet_coluna[espaco_cheio];
-	int x=-1;
+	int x=0;
 	int loops=0;
+	int z=0;
 	
 //	Impressão dos dados colhidos e informações pertinentes:
 
@@ -102,6 +105,7 @@ int main(){
 			}
 		}
 	}
+	
 // INSERÇÃO DO INDIVIDUO INFECTADO:
 	
 	for(i=0;i<num_infect_ini;i++){
@@ -114,79 +118,94 @@ int main(){
 		}
 		else{
 			i--;
-		}		
+		}	
 	}
 	
-	
+//	IMPRESSÃO DA MATRIZ INCIAL:
+
+	printf("\n----- MATRIZ INCIAL-----\n");
+
+	for(i=0;i<num_linhas;i++){
+			for(j=0;j<num_colunas;j++){
+				
+				if(espaco_amostral[i][j] == 2){
+					printf("(%d)", espaco_amostral[i][j]);
+				}else{
+					printf(" %d ", espaco_amostral[i][j]);
+				}			
+			}
+			printf("\n");
+		}
 
 //	INÍCIO DAS ITERAÇÕES
 
-while(loops == 0){
-	
-	printf("\n----- iteracao-----\n");
-	
-	x=-1;
-	loops = 1;
-	
-	for(i=0;i<num_linhas;i++){
-		for(j=0;j<num_colunas;j++){
-			if(espaco_amostral[i][j] == 2){
-				x++;
-				vet_linha[x] = i;
-				vet_coluna[x] = j;
+	while(loops == 0){
+		
+		printf("\n----- iteracao-----\n");
+		
+		x=-1;
+		loops=1;
+		z=0;
+		
+		for(i=0;i<num_linhas;i++){
+			for(j=0;j<num_colunas;j++){
+				if(espaco_amostral[i][j] == 2){
+					x++;
+					vet_linha[x] = i;
+					vet_coluna[x] = j;
+				}
 			}
 		}
-	}
-	
-	for(i=0;i<num_linhas;i++){
-		for(j=0;j<num_colunas;j++){
+		
+		for(i=0;i<num_linhas;i++){
+			for(j=0;j<num_colunas;j++){
+					
+				if(i == vet_linha[z] && j == vet_coluna[z]){
+					
+					if(espaco_amostral[i+1][j] == 1){
+					
+						espaco_amostral[i+1][j] = 2;
+						loops = 0;
 				
-			if(i == vet_linha[loops] && j == vet_coluna[loops]){
-				
-				if(espaco_amostral[i+1][j] == 1){
-				
-					espaco_amostral[i+1][j] = 2;
-					loops = 0;
-			
+					}
+					if(espaco_amostral[i][j-1] == 1){
+					
+						espaco_amostral[i][j-1] = 2;
+						loops = 0;
+					
+					}
+					if(espaco_amostral[i-1][j] == 1){
+					
+						espaco_amostral[i-1][j] = 2;
+						loops = 0;
+					
+					}
+					if(espaco_amostral[i][j+1] == 1){
+					
+						espaco_amostral[i][j+1] = 2;
+						loops = 0;
+					
+					}
+					z++;
 				}
-				if(espaco_amostral[i][j-1] == 1){
-				
-					espaco_amostral[i][j-1] = 2;
-					loops = 0;
-				
-				}
-				if(espaco_amostral[i-1][j] == 1){
-				
-					espaco_amostral[i-1][j] = 2;
-					loops = 0;
-				
-				}
-				if(espaco_amostral[i][j+1] == 1){
-				
-					espaco_amostral[i][j+1] = 2;
-					loops = 0;
-				
-				}
-
-			}
-				
-		}			
-			
-	}
-	printf("\n");
-	for(i=0;i<num_linhas;i++){
-		for(j=0;j<num_colunas;j++){
-			
-			if(espaco_amostral[i][j] == 2){
-				printf("(%d)", espaco_amostral[i][j]);
-			}else{
-				printf(" %d ", espaco_amostral[i][j]);
+					
 			}			
-		}
+				
+		}		
+		
+		for(i=0;i<num_linhas;i++){
+			for(j=0;j<num_colunas;j++){
+				
+				if(espaco_amostral[i][j] == 2){
+					printf("(%d)", espaco_amostral[i][j]);
+				}else{
+					printf(" %d ", espaco_amostral[i][j]);
+				}			
+			}
+			printf("\n");
+		}		
 		printf("\n");
 	}
-	printf("\n-----------------\n");
-}
 	
 //for(i=0;i<num_linhas;i++){
 //	free(espaco_amostral[i]);
