@@ -14,5 +14,7 @@
 
 <p align="justify">O programa finaliza quando não tiverem mais infectados em uma iteração e deve ser apresentado na saída o print das matrizes em cada iteração e quando finalizar o resumo da infecção: Espaço amostral simulado, taxa de isolamento, quantidade de infectados iniciais, porcentagem da população contaminada ao final, porcentagem da população saudável e quantidade de iterações que foram precisas.</p>
 
+<h2>Estágio de desenvolvimento:</h2>
 
+<p align="justify"> Neste momento o código está em fase final de desenvolviemnto, ainda eistem alguns bugs, porém os retoques finais estão por vir. Caso tenha alguma sugestão ficarei feliz em ler seu pull request! </p>
 
